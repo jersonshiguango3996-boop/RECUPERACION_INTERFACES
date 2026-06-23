@@ -1,0 +1,427 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Furni - Modern Interior Design</title>
+
+    <!-- TODO EL CSS LOCAL AQUÍ (Sin frameworks ni archivos externos) -->
+    <style>
+        /* Estilos Generales y Reseteo */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #ffffff;
+            color: #2f2f2f;
+            line-height: 1.6;
+        }
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Menu de Navegación */
+        .custom-navbar {
+            background-color: #3b5d50;
+            padding: 20px 0;
+        }
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar-brand {
+            font-size: 24px;
+            font-weight: 700;
+            color: #ffffff;
+        }
+        .navbar-brand span {
+            color: #f9bf29;
+        }
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            align-items: center;
+        }
+        .nav-menu li {
+            margin-left: 30px;
+        }
+        .nav-link {
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 500;
+            font-size: 15px;
+            transition: color 0.3s;
+        }
+        .nav-link:hover, .nav-menu li.active .nav-link {
+            color: #ffffff;
+        }
+        .nav-icons {
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        /* Seccion Hero (Principal) */
+        .hero {
+            background-color: #3b5d50;
+            color: #ffffff;
+            padding: 60px 0 80px 0;
+        }
+        .hero-grid {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+        .hero-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        .hero-text h1 {
+            font-size: 48px;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        .hero-text p {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .btn-secondary {
+            background-color: #f9bf29;
+            color: #2f2f2f;
+            border: 2px solid #f9bf29;
+            margin-right: 10px;
+        }
+        .btn-secondary:hover {
+            background-color: #f8b60c;
+            border-color: #f8b60c;
+        }
+        .btn-white-outline {
+            background-color: transparent;
+            color: #ffffff;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        .btn-white-outline:hover {
+            background-color: #ffffff;
+            color: #2f2f2f;
+            border-color: #ffffff;
+        }
+        .hero-img {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+        }
+        .hero-img img {
+            max-height: 400px;
+            object-fit: contain;
+        }
+
+        /* Sección de Productos */
+        .product-section {
+            padding: 80px 0;
+        }
+        .product-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        .product-intro {
+            flex: 1;
+            min-width: 230px;
+            display: flex;
+            flex-column: column;
+            justify-content: center;
+        }
+        .product-intro h2 {
+            font-size: 32px;
+            margin-bottom: 15px;
+            color: #2f2f2f;
+        }
+        .product-intro p {
+            color: #6a6a6a;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+        .btn-dark {
+            background-color: #2f2f2f;
+            color: #ffffff;
+            border: none;
+            padding: 10px 25px;
+        }
+        .btn-dark:hover {
+            background-color: #404040;
+        }
+        .product-item {
+            flex: 1;
+            min-width: 230px;
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            transition: background-color 0.3s;
+        }
+        .product-item:hover {
+            background-color: #eff2f1;
+        }
+        .product-thumbnail {
+            max-height: 200px;
+            object-fit: contain;
+            margin-bottom: 15px;
+            position: relative;
+            top: 0;
+            transition: top 0.3s;
+        }
+        .product-item:hover .product-thumbnail {
+            top: -15px;
+        }
+        .product-title {
+            font-size: 16px;
+            color: #2f2f2f;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+        .product-price {
+            font-size: 18px;
+            color: #2f2f2f;
+            font-weight: 700;
+        }
+
+        /* Sección Why Choose Us */
+        .why-choose-section {
+            background-color: #eff2f1;
+            padding: 80px 0;
+        }
+        .choose-grid {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+        }
+        .choose-text {
+            flex: 1.2;
+            min-width: 300px;
+        }
+        .choose-text h2 {
+            font-size: 32px;
+            color: #2f2f2f;
+            margin-bottom: 15px;
+        }
+        .choose-text > p {
+            color: #6a6a6a;
+            margin-bottom: 40px;
+            font-size: 14px;
+        }
+        .features-subgrid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .feature-box {
+            flex: 1;
+            min-width: 220px;
+            margin-bottom: 20px;
+        }
+        .feature-box .icon-placeholder {
+            width: 45px;
+            height: 45px;
+            background-color: #dce5e4;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: #3b5d50;
+        }
+        .feature-box h3 {
+            font-size: 15px;
+            color: #2f2f2f;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        .feature-box p {
+            font-size: 13px;
+            color: #6a6a6a;
+            line-height: 1.5;
+        }
+        .choose-img {
+            flex: 0.8;
+            min-width: 300px;
+            text-align: center;
+        }
+        .choose-img img {
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        /* Footer */
+        .footer-section {
+            padding: 40px 0;
+            text-align: center;
+            background-color: #ffffff;
+            border-top: 1px solid #e5e5e5;
+            font-size: 14px;
+            color: #6a6a6a;
+        }
+
+        /* Responsividad Básica */
+        @media (max-width: 768px) {
+            .nav-container, .hero-grid, .choose-grid {
+                flex-direction: column;
+                text-align: center;
+            }
+            .nav-menu {
+                margin-top: 20px;
+                padding: 0;
+            }
+            .nav-menu li {
+                margin: 0 10px;
+            }
+            .hero-text h1 {
+                font-size: 34px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Menú de Navegación -->
+<nav class="custom-navbar">
+    <div class="container nav-container">
+        <a class="navbar-brand" href="{% url 'inicio' %}">Furni<span>.</span></a>
+        <ul class="nav-menu">
+            <li class="active"><a class="nav-link" href="{% url 'inicio' %}">Home</a></li>
+            <li><a class="nav-link" href="#">Shop</a></li>
+            <li><a class="nav-link" href="#">About us</a></li>
+            <li><a class="nav-link" href="#">Services</a></li>
+            <li><a class="nav-link" href="#">Blog</a></li>
+            <li><a class="nav-link" href="#">Contact us</a></li>
+            <!-- Iconos simulados con texto/emojis locales seguros -->
+            <li class="nav-icons"><a class="nav-link" href="#">👤</a></li>
+            <li class="nav-icons"><a class="nav-link" href="#">🛒</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<div class="hero">
+    <div class="container hero-grid">
+        <div class="hero-text">
+            <h1>Modern Interior <span style="display: block;">Design Studio</span></h1>
+            <p>Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique.</p>
+            <div>
+                <a href="#" class="btn btn-secondary">Shop Now</a>
+                <a href="#" class="btn btn-white-outline">Explore</a>
+            </div>
+        </div>
+        <div class="hero-img">
+            <img src="{% static 'assets/img/couch.png' %}" alt="Couch">
+        </div>
+    </div>
+</div>
+
+<!-- Catálogo de Productos -->
+<div class="product-section">
+    <div class="container product-grid">
+        
+        <div class="product-intro">
+            <h2>Crafted with excellent material.</h2>
+            <p>Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique.</p>
+            <div><a href="#" class="btn btn-dark">Explore</a></div>
+        </div>
+
+        <div class="product-item">
+            <img src="{% static 'assets/img/product-1.png' %}" class="product-thumbnail" alt="Nordic Chair">
+            <h3 class="product-title">Nordic Chair</h3>
+            <strong class="product-price">$50.00</strong>
+        </div>
+
+        <div class="product-item">
+            <img src="{% static 'assets/img/product-2.png' %}" class="product-thumbnail" alt="Kruzo Aero Chair">
+            <h3 class="product-title">Kruzo Aero Chair</h3>
+            <strong class="product-price">$78.00</strong>
+        </div>
+
+        <div class="product-item">
+            <img src="{% static 'assets/img/product-3.png' %}" class="product-thumbnail" alt="Ergonomic Chair">
+            <h3 class="product-title">Ergonomic Chair</h3>
+            <strong class="product-price">$43.00</strong>
+        </div>
+
+    </div>
+</div>
+
+<!-- Sección de Ventajas (Why Choose Us) -->
+<div class="why-choose-section">
+    <div class="container choose-grid">
+        <div class="choose-text">
+            <h2>Why Choose Us</h2>
+            <p>Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique.</p>
+
+            <div class="features-subgrid">
+                <div class="feature-box">
+                    <div class="icon-placeholder">🚚</div>
+                    <h3>Fast &amp; Free Shipping</h3>
+                    <p>Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate.</p>
+                </div>
+
+                <div class="feature-box">
+                    <div class="icon-placeholder">🛍️</div>
+                    <h3>Easy to Shop</h3>
+                    <p>Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate.</p>
+                </div>
+
+                <div class="feature-box">
+                    <div class="icon-placeholder">📞</div>
+                    <h3>24/7 Support</h3>
+                    <p>Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate.</p>
+                </div>
+
+                <div class="feature-box">
+                    <div class="icon-placeholder">🔄</div>
+                    <h3>Hassle Free Returns</h3>
+                    <p>Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="choose-img">
+            <img src="{% static 'assets/img/why-choose-us-img.jpg' %}" alt="Why Choose Us">
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer-section">
+    <div class="container">
+        <p>&copy; 2026 Furni. Todos los derechos reservados. HTML y CSS local sin dependencias.</p>
+    </div>
+</footer>
+
+</body>
+</html>
